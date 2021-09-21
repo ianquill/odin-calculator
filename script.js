@@ -32,16 +32,6 @@ function operate(a, b, operator) {
     }
 }
 
-console.log(add(22, 21));
+const display = document.querySelector(".display");
 
-console.log(subtract(214, 124));
-
-console.log(multiply(2, 4));
-
-console.log(divide(4, 2));
-
-console.log(operate(2, 4, "+"));
-
-console.log(operate(4, 8, "*"));
-
-console.log(operate(2, 5, "/"));
+display.textContent = 696969;
