@@ -2,6 +2,8 @@ let currentOperator;
 let numA;
 let numB;
 
+// basic operators
+
 function add(a, b) {
     return a + b;
 }
@@ -17,6 +19,8 @@ function multiply(a, b) {
 function divide(a, b) {
     return a / b;
 }
+
+// calculator logic
 
 function operate(a, b, operator) {
 
@@ -36,11 +40,11 @@ function operate(a, b, operator) {
     }
 }
 
+// display
+
 const display = document.querySelector(".display");
 
-let displayContent = 6969691;
-
-// display.textContent = "";
+let displayContent;
 
 function refreshDisplay() {
     // add currentOperator display to this
