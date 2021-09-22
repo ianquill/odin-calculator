@@ -1,5 +1,6 @@
 html, body {
     height: 100%;
+    font-family: Arial, sans-serif;
 }
 
 body {
@@ -50,6 +51,7 @@ body {
 }
 
 .button {
+    font-size: 14px;
     min-height: 70px;
     padding: 14px;
     border-radius: 5px;
