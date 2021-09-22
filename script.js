@@ -1,10 +1,8 @@
-let currentOperator;
-let numA;
-let numB;
-
 // basic operators
 
 function add(a, b) {
+    a = parseFloat(a);
+    b = parseFloat(b);
     return a + b;
 }
 
@@ -35,22 +33,75 @@ function operate(a, b, operator) {
             return multiply(a, b);
 
         case "/":
-            return divide(a, b);
+            if (b == 0) {
+                return "ERROR"
+            } else {
+                return roundResult(divide(a, b));
+            }
             
     }
 }
 
-// display
+function roundResult(result) {
+    // check length of result, if more than 15, take the difference and round to that many digits
+    if (result.length > 15) {
+        let resultDifference = result.length - 15;
+        let roundedResult = result.toPrecision(resultDifference);
+        console.log(roundedResult);
+        return roundedResult;
+    }
 
-const display = document.querySelector(".display");
+}
 
-let displayContent;
+// displays
+
+const mainDisplay = document.querySelector(".main-display");
+const subDisplay = document.querySelector(".sub-display");
+const operatorDisplay = document.querySelector(".operator-display");
+
+let mainDisplayContent;
+let subDisplayContent;
+let operatorDisplayContent;
+let result = false;
+
 
 function refreshDisplay() {
-    // add currentOperator display to this
+    console.log(mainDisplayContent.length);
 
-    display.textContent = displayContent;
-    return;
+    // if (mainDisplayContent.length < 15) {
+    //     mainDisplay.textContent = mainDisplayContent;
+    //     subDisplay.textContent = subDisplayContent;
+    //     operatorDisplay.textContent = operatorDisplayContent;
+    // } else if (mainDisplayContent.length >= 15) {
+    //     mainDisplayContent = "ERROR: OVERFLOW";
+    //     mainDisplay.textContent = mainDisplayContent;
+    // }
+
+    mainDisplay.textContent = mainDisplayContent;
+    subDisplay.textContent = subDisplayContent;
+    operatorDisplay.textContent = operatorDisplayContent;
+
+}
+
+function checkMainDisplay() {
+    if (mainDisplayContent === "") {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function fillSubDisplay() {
+    subDisplayContent = mainDisplayContent;
+    mainDisplayContent = "";
+}
+
+function checkDisplaysFull() {
+    if (mainDisplayContent !== "" & subDisplayContent !== "" & operatorDisplayContent !== "") {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 // buttons
@@ -59,7 +110,10 @@ function pressButton(button) {
     
     switch (button) {
         case "clear":
-            displayContent = "";
+            subDisplayContent = "";
+            mainDisplayContent = "";
+            operatorDisplayContent = "";
+            result = false;
             refreshDisplay(); 
             break;
 
@@ -70,83 +124,148 @@ function pressButton(button) {
             break;
 
         case "divide":
-            currentOperator = "/";
-            refreshDisplay(); 
+            result = false;
+            if (checkDisplaysFull()) {
+                subDisplayContent = operate(subDisplayContent, mainDisplayContent, operatorDisplayContent);
+                operatorDisplayContent = "/";
+                mainDisplayContent = "";
+                refreshDisplay();
+            } else if (checkMainDisplay()) {
+                operatorDisplayContent = "/";
+                fillSubDisplay();
+                refreshDisplay(); 
+            }
             break;
 
         case "multiply":
-            currentOperator = "*";
-            refreshDisplay(); 
+            result = false;
+            if (checkDisplaysFull()) {
+                subDisplayContent = operate(subDisplayContent, mainDisplayContent, operatorDisplayContent);
+                operatorDisplayContent = "*";
+                mainDisplayContent = "";
+                refreshDisplay();
+            } else if (checkMainDisplay()) {
+                operatorDisplayContent = "*";
+                fillSubDisplay();
+                refreshDisplay(); 
+            }
             break;
 
         case "subtract":
-            currentOperator = "-";
-            refreshDisplay(); 
+            result = false;
+            if (checkDisplaysFull()) {
+                subDisplayContent = operate(subDisplayContent, mainDisplayContent, operatorDisplayContent);
+                mainDisplayContent = "";
+                operatorDisplayContent = "-";
+                refreshDisplay();
+            } else if (checkMainDisplay()) {
+                operatorDisplayContent = "-";
+                fillSubDisplay();
+                refreshDisplay(); 
+            }
             break;
 
         case "add":
-            currentOperator = "+";
-            refreshDisplay(); 
+            result = false;
+            if (checkDisplaysFull()) {
+                subDisplayContent = operate(subDisplayContent, mainDisplayContent, operatorDisplayContent);
+                operatorDisplayContent = "+";
+                mainDisplayContent = "";
+                refreshDisplay();
+            } else if (checkMainDisplay()) {
+                operatorDisplayContent = "+";
+                fillSubDisplay();
+                refreshDisplay(); 
+            }
             break;
 
         case "decimal":
-            displayContent = "";
-            refreshDisplay(); 
+            if (!mainDisplayContent.includes('.')){
+                mainDisplayContent += ".";
+                refreshDisplay(); 
+            }
             break;
 
         case "equals":
-            displayContent = operate(a, b, currentOperator);
-            refreshDisplay(); 
+            if (mainDisplayContent !== "" & subDisplayContent !== "" & operatorDisplayContent !== "") {
+                console.log("equals");
+                mainDisplayContent = operate(subDisplayContent, mainDisplayContent, operatorDisplayContent);
+                subDisplayContent = "";
+                operatorDisplayContent = "";
+                result = true;
+                refreshDisplay(); 
+            }
+
             break;
 
         case "zero":
-            displayContent += 0;
-            refreshDisplay(); 
+            if (!result) {
+                mainDisplayContent += 0;
+                refreshDisplay(); 
+            }
             break;
 
         case "one":
-            displayContent += 1;
-            refreshDisplay(); 
+            if (!result) {
+                mainDisplayContent += 1;
+                refreshDisplay(); 
+            }
             break;
             
         case "two":
-            displayContent += 2;
-            refreshDisplay(); 
+            if (!result) {
+                mainDisplayContent += 2;
+                refreshDisplay(); 
+            }
             break;
 
         case "three":
-            displayContent += 3;
-            refreshDisplay(); 
+            if (!result) {
+                mainDisplayContent += 3;
+                refreshDisplay(); 
+            }
             break;
 
         case "four":
-            displayContent += 4;
-            refreshDisplay(); 
+            if (!result) {
+                mainDisplayContent += 4;
+                refreshDisplay(); 
+            }
             break;
 
         case "five":
-            displayContent += 5;
-            refreshDisplay(); 
+            if (!result) {
+                mainDisplayContent += 5;
+                refreshDisplay(); 
+            }
             break;
 
         case "six":
-            displayContent += 6;
-            refreshDisplay(); 
+            if (!result) {
+                mainDisplayContent += 6;
+                refreshDisplay(); 
+            }
             break;
 
         case "seven":
-            displayContent += 7;
-            refreshDisplay(); 
+            if (!result) {
+                mainDisplayContent += 7;
+                refreshDisplay(); 
+            }
             break;
 
         case "eight":
-            displayContent += 8;
-            refreshDisplay(); 
+            if (!result) {
+                mainDisplayContent += 8;
+                refreshDisplay(); 
+            }
             break;
 
         case "nine":
-            displayContent += 9;
-            refreshDisplay(); 
+            if (!result) {
+                mainDisplayContent += 9;
+                refreshDisplay(); 
+            }
             break;
 
         default:
