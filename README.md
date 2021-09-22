@@ -2,7 +2,6 @@
 
     - decimals rounded
     - overflow fix
-    
     - backspace functionality
     - keyboard support
 
