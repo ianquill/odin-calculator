@@ -47,7 +47,7 @@ function roundResult(result) {
     console.log("result is " + result);
     if (result.toString().length > 15) {
         console.log("rounded");
-        let resultDifference = result.toString().length - 13;
+        let resultDifference = result.toString().length - 1;
         let roundedResult = result.toPrecision((result.toString().length - resultDifference));
         console.log(roundedResult);
         return roundedResult;
@@ -67,7 +67,6 @@ let mainDisplayContent;
 let subDisplayContent;
 let operatorDisplayContent;
 let result = false;
-
 let suspend = false;
 
 
@@ -75,20 +74,16 @@ function refreshDisplay() {
     console.log(mainDisplayContent.length);
 
     if (mainDisplayContent.toString().length < 15) {
+        suspend = false;
         mainDisplay.textContent = mainDisplayContent;
         subDisplay.textContent = subDisplayContent;
         operatorDisplay.textContent = operatorDisplayContent;
     } else if (mainDisplayContent.toString().length >= 15) {
         suspend = true;
-        operatorDisplayContent = "";
-        operatorDisplay.textContent = operatorDisplayContent;
-        mainDisplayContent = "ERROR: OVERFLOW";
-        mainDisplay.textContent = mainDisplayContent;
+        subDisplay.textContent = "";
+        operatorDisplay.textContent = "";
+        mainDisplay.textContent = "ERROR: OVERFLOW";
     }
-
-    // mainDisplay.textContent = mainDisplayContent;
-    // subDisplay.textContent = subDisplayContent;
-    // operatorDisplay.textContent = operatorDisplayContent;
 
 }
 
