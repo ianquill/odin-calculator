@@ -1,10 +1,8 @@
-# TODO
+# README
 
-    - keyboard support
-    - add footer
-    - button hover and click 
-    - delete initial values
-    - add default display of 0?
+This project was created as part of the Odin Project curriculum. It has num-pad support (I haven't figured out how to have multiple keys at the same time).
+
+# TODO
 
 # BUGS
 

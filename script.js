@@ -63,9 +63,9 @@ const mainDisplay = document.querySelector(".main-display");
 const subDisplay = document.querySelector(".sub-display");
 const operatorDisplay = document.querySelector(".operator-display");
 
-let mainDisplayContent;
-let subDisplayContent;
-let operatorDisplayContent;
+let mainDisplayContent = "";
+let subDisplayContent = "";
+let operatorDisplayContent = "";
 let result = false;
 let suspend = false;
 
@@ -86,6 +86,8 @@ function refreshDisplay() {
     }
 
 }
+
+refreshDisplay();
 
 function checkMainDisplay() {
     if (mainDisplayContent === "") {
@@ -285,4 +287,9 @@ buttons.forEach((button) => {
     button.addEventListener("click", () => {
         pressButton(button.id);
     })
+})
+
+window.addEventListener('keydown', function(e) {
+    const button = document.querySelector(`button[data-key="${e.keyCode}"]`)
+    pressButton(button.id);
 })
